@@ -50,8 +50,15 @@ jobs:
         run: west build -s zmk/app -d build/right -b adv360_right -- -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
       - name: Adv360 Right Kconfig file
         run: grep -vE '(^#|^$)' build/right/zephyr/.config
+      - name: West Build (dongle)
+        run: west build -s zmk/app -d build/dongle -b adafruit_feather_nrf52840 -- -DSHIELD=dongle -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+      - name: Dongle Kconfig file
+        run: grep -vE '(^#|^$)' build/dongle/zephyr/.config
       - name: Rename zmk.uf2
-        run: cp build/left/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-left.uf2 && cp build/right/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-right.uf2
+        run: |
+          cp build/left/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-left.uf2
+          cp build/right/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-right.uf2
+          cp build/dongle/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-dongle.uf2
       - name: Archive (Adv360)
         uses: actions/upload-artifact@v4
         with:
@@ -59,6 +66,7 @@ jobs:
           path: |
             ${{ steps.get_info.outputs.file_prefix }}-left.uf2
             ${{ steps.get_info.outputs.file_prefix }}-right.uf2
+            ${{ steps.get_info.outputs.file_prefix }}-dongle.uf2
   build-clique:
     runs-on: ubuntu-latest
     container:
@@ -106,8 +114,15 @@ jobs:
         run: west build -s zmk/app -d build/right -b adv360_right -- -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
       - name: Adv360 Right Kconfig file
         run: grep -vE '(^#|^$)' build/right/zephyr/.config
+      - name: West Build (dongle)
+        run: west build -s zmk/app -d build/dongle -b adafruit_feather_nrf52840 -S studio-rpc-usb-uart -- -DSHIELD=dongle -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" -DCONFIG_ZMK_STUDIO=y
+      - name: Dongle Kconfig file
+        run: grep -vE '(^#|^$)' build/dongle/zephyr/.config
       - name: Rename zmk.uf2
-        run: cp build/left/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-left.uf2 && cp build/right/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-right.uf2
+        run: |
+          cp build/left/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-left.uf2
+          cp build/right/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-right.uf2
+          cp build/dongle/zephyr/zmk.uf2 ${{ steps.get_info.outputs.file_prefix }}-dongle.uf2
       - name: Archive (Adv360)
         uses: actions/upload-artifact@v4
         with:
@@ -115,3 +130,4 @@ jobs:
           path: |
             ${{ steps.get_info.outputs.file_prefix }}-left.uf2
             ${{ steps.get_info.outputs.file_prefix }}-right.uf2
+            ${{ steps.get_info.outputs.file_prefix }}-dongle.uf2
