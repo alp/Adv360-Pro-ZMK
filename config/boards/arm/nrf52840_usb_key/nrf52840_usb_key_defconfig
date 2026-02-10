@@ -8,6 +8,9 @@ CONFIG_ARM_MPU=y
 # Enable GPIO
 CONFIG_GPIO=y
 
+# Pin control (required by USB driver)
+CONFIG_PINCTRL=y
+
 # Enable writing to flash (for BLE pairing and settings persistence)
 CONFIG_USE_DT_CODE_PARTITION=y
 CONFIG_MPU_ALLOW_FLASH_WRITE=y
