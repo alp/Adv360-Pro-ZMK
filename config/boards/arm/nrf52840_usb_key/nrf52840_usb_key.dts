@@ -42,14 +42,12 @@ zephyr_udc0: &usbd {
         #address-cells = <1>;
         #size-cells = <1>;
 
-        /* SoftDevice / MBR region */
-        sd_partition: partition@0 {
-            reg = <0x00000000 0x00026000>;
-        };
+        /* MBR occupies 0x0–0x1000 (4 KB) */
+        /* No SoftDevice installed — app starts right after MBR */
 
         /* Application */
-        code_partition: partition@26000 {
-            reg = <0x00026000 0x000c6000>;
+        code_partition: partition@1000 {
+            reg = <0x00001000 0x000eb000>;
         };
 
         /* Non-volatile storage for settings/pairing */
