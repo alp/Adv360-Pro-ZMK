@@ -1,0 +1,13 @@
+identifier: nrf52840_usb_key
+name: Adafruit nRF52840 USB Key (MDBT50Q-RX)
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+  - xtools
+supported:
+  - gpio
+  - usb_device
+  - ble
+  - nvs

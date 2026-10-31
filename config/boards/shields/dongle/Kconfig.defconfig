@@ -1,0 +1,15 @@
+if SHIELD_DONGLE
+
+config ZMK_KEYBOARD_NAME
+    default "Adv360 Dongle"
+
+config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
+    default y
+
+config ZMK_USB
+    default y
+
+config ZMK_BLE
+    default y
+
+endif

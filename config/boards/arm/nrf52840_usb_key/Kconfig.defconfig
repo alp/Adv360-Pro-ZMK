@@ -1,0 +1,19 @@
+if BOARD_NRF52840_USB_KEY
+
+config BOARD
+    default "nrf52840_usb_key"
+
+config BT_CTLR
+    default BT
+
+if USB
+
+config USB_NRFX
+    default y
+
+config USB_DEVICE_STACK
+    default y
+
+endif # USB
+
+endif # BOARD_NRF52840_USB_KEY
