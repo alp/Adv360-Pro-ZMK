@@ -32,6 +32,7 @@ left:
 		-e TIMESTAMP=$(TIMESTAMP) \
 		-e COMMIT=$(COMMIT) \
 		-e BUILD_RIGHT=false \
+		-e BUILD_DONGLE=false \
 		zmk
 	git checkout config/version.dtsi
 
